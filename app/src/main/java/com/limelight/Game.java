@@ -205,6 +205,12 @@ public class Game extends Activity implements SurfaceHolder.Callback,
         // Listen for UI visibility events
         getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(this);
 
+    }
+
+    protected void onStart() {
+
+        super.onStart();
+
         // Change volume button behavior
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
@@ -228,8 +234,7 @@ public class Game extends Activity implements SurfaceHolder.Callback,
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 getWindow().getAttributes().layoutInDisplayCutoutMode =
                         WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS;
-            }
-            else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 getWindow().getAttributes().layoutInDisplayCutoutMode =
                         WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
             }
@@ -254,17 +259,17 @@ public class Game extends Activity implements SurfaceHolder.Callback,
             // artificially increasing input latency while streaming.
             streamView.requestUnbufferedDispatch(
                     InputDevice.SOURCE_CLASS_BUTTON | // Keyboards
-                    InputDevice.SOURCE_CLASS_JOYSTICK | // Gamepads
-                    InputDevice.SOURCE_CLASS_POINTER | // Touchscreens and mice (w/o pointer capture)
-                    InputDevice.SOURCE_CLASS_POSITION | // Touchpads
-                    InputDevice.SOURCE_CLASS_TRACKBALL // Mice (pointer capture)
+                            InputDevice.SOURCE_CLASS_JOYSTICK | // Gamepads
+                            InputDevice.SOURCE_CLASS_POINTER | // Touchscreens and mice (w/o pointer capture)
+                            InputDevice.SOURCE_CLASS_POSITION | // Touchpads
+                            InputDevice.SOURCE_CLASS_TRACKBALL // Mice (pointer capture)
             );
             backgroundTouchView.requestUnbufferedDispatch(
                     InputDevice.SOURCE_CLASS_BUTTON | // Keyboards
-                    InputDevice.SOURCE_CLASS_JOYSTICK | // Gamepads
-                    InputDevice.SOURCE_CLASS_POINTER | // Touchscreens and mice (w/o pointer capture)
-                    InputDevice.SOURCE_CLASS_POSITION | // Touchpads
-                    InputDevice.SOURCE_CLASS_TRACKBALL // Mice (pointer capture)
+                            InputDevice.SOURCE_CLASS_JOYSTICK | // Gamepads
+                            InputDevice.SOURCE_CLASS_POINTER | // Touchscreens and mice (w/o pointer capture)
+                            InputDevice.SOURCE_CLASS_POSITION | // Touchpads
+                            InputDevice.SOURCE_CLASS_TRACKBALL // Mice (pointer capture)
             );
         }
 
@@ -362,8 +367,7 @@ public class Game extends Activity implements SurfaceHolder.Callback,
                     // Nope, no HDR for us :(
                     Toast.makeText(this, "Display does not support HDR10", Toast.LENGTH_LONG).show();
                 }
-            }
-            else {
+            } else {
                 Toast.makeText(this, "HDR requires Android 7.0 or later", Toast.LENGTH_LONG).show();
             }
         }
@@ -438,7 +442,7 @@ public class Game extends Activity implements SurfaceHolder.Callback,
 
         // Set to the optimal mode for streaming
         float displayRefreshRate = prepareDisplayForRendering();
-        LimeLog.info("Display refresh rate: "+displayRefreshRate);
+        LimeLog.info("Display refresh rate: " + displayRefreshRate);
 
         // If the user requested frame pacing using a capped FPS, we will need to change our
         // desired FPS setting here in accordance with the active display refresh rate.
@@ -454,8 +458,7 @@ public class Game extends Activity implements SurfaceHolder.Callback,
                     // Let's avoid clearly bogus refresh rates and fall back to legacy rendering
                     prefConfig.framePacing = PreferenceConfiguration.FRAME_PACING_BALANCED;
                     LimeLog.info("Bogus refresh rate: " + roundedRefreshRate);
-                }
-                else {
+                } else {
                     chosenFrameRate = roundedRefreshRate - 1;
                     LimeLog.info("Adjusting FPS target for screen to " + chosenFrameRate);
                 }
@@ -474,7 +477,7 @@ public class Game extends Activity implements SurfaceHolder.Callback,
                 .setRemoteConfiguration(StreamConfiguration.STREAM_CFG_AUTO) // NvConnection will perform LAN and VPN detection
                 .setSupportedVideoFormats(supportedVideoFormats)
                 .setAttachedGamepadMask(gamepadMask)
-                .setClientRefreshRateX100((int)(displayRefreshRate * 100))
+                .setClientRefreshRateX100((int) (displayRefreshRate * 100))
                 .setAudioConfiguration(prefConfig.audioConfiguration)
                 .setColorSpace(decoderRenderer.getPreferredColorSpace())
                 .setColorRange(decoderRenderer.getPreferredColorRange())
@@ -496,8 +499,7 @@ public class Game extends Activity implements SurfaceHolder.Callback,
         for (int i = 0; i < touchContextMap.length; i++) {
             if (!prefConfig.touchscreenTrackpad) {
                 touchContextMap[i] = new AbsoluteTouchContext(conn, i, streamView);
-            }
-            else {
+            } else {
                 touchContextMap[i] = new RelativeTouchContext(conn, i,
                         REFERENCE_HORIZ_RES, REFERENCE_VERT_RES,
                         streamView, prefConfig);
@@ -507,7 +509,7 @@ public class Game extends Activity implements SurfaceHolder.Callback,
         if (prefConfig.onscreenController) {
             // create virtual onscreen controller
             virtualController = new VirtualController(controllerHandler,
-                    (FrameLayout)streamView.getParent(),
+                    (FrameLayout) streamView.getParent(),
                     this);
             virtualController.refreshLayout();
             virtualController.show();
@@ -1029,6 +1031,7 @@ public class Game extends Activity implements SurfaceHolder.Callback,
     protected void onDestroy() {
         super.onDestroy();
 
+        LimeLog.info("OnDestroy Called");
         if (controllerHandler != null) {
             controllerHandler.destroy();
         }
@@ -1055,6 +1058,8 @@ public class Game extends Activity implements SurfaceHolder.Callback,
 
     @Override
     protected void onPause() {
+
+        LimeLog.info("OnPause Called");
         if (isFinishing()) {
             // Stop any further input device notifications before we lose focus (and pointer capture)
             if (controllerHandler != null) {
@@ -1072,6 +1077,7 @@ public class Game extends Activity implements SurfaceHolder.Callback,
     protected void onStop() {
         super.onStop();
 
+        LimeLog.info("OnStop Called");
         SpinnerDialog.closeDialogs(this);
         Dialog.closeDialogs();
 
@@ -1137,7 +1143,7 @@ public class Game extends Activity implements SurfaceHolder.Callback,
             }
         }
 
-        finish();
+        //finish();
     }
 
     private void setInputGrabState(boolean grab) {
@@ -1320,16 +1326,18 @@ public class Game extends Activity implements SurfaceHolder.Callback,
                 eventSource == InputDevice.SOURCE_MOUSE_RELATIVE) &&
                 event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
 
+
+            LimeLog.info("Discarding back event down");
             // Send the right mouse button event if mouse back and forward
             // are disabled. If they are enabled, handleMotionEvent() will take
             // care of this.
             if (!prefConfig.mouseNavButtons) {
-                conn.sendMouseButtonDown(MouseButtonPacket.BUTTON_RIGHT);
+                //conn.sendMouseButtonDown(MouseButtonPacket.BUTTON_RIGHT);
             }
 
             // Always return true, otherwise the back press will be propagated
             // up to the parent and finish the activity.
-            return true;
+            //return true;
         }
 
         boolean handled = false;
@@ -1401,16 +1409,17 @@ public class Game extends Activity implements SurfaceHolder.Callback,
                 eventSource == InputDevice.SOURCE_MOUSE_RELATIVE) &&
                 event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
 
+            LimeLog.info("Discarding back event up");
             // Send the right mouse button event if mouse back and forward
             // are disabled. If they are enabled, handleMotionEvent() will take
             // care of this.
             if (!prefConfig.mouseNavButtons) {
-                conn.sendMouseButtonUp(MouseButtonPacket.BUTTON_RIGHT);
+                //conn.sendMouseButtonUp(MouseButtonPacket.BUTTON_RIGHT);
             }
 
             // Always return true, otherwise the back press will be propagated
             // up to the parent and finish the activity.
-            return true;
+            //return true;
         }
 
         boolean handled = false;
@@ -2208,7 +2217,7 @@ public class Game extends Activity implements SurfaceHolder.Callback,
 
     private void stopConnection() {
         if (connecting || connected) {
-            connecting = connected = false;
+            connecting = connected = attemptedConnection = false;
             updatePipAutoEnter();
 
             controllerHandler.stop();
@@ -2275,6 +2284,8 @@ public class Game extends Activity implements SurfaceHolder.Callback,
         // This does network I/O, so don't do it on the main thread.
         final int portFlags = MoonBridge.getPortFlagsFromTerminationErrorCode(errorCode);
         final int portTestResult = MoonBridge.testClientConnectivity(ServerHelper.CONNECTION_TEST_SERVER,443, portFlags);
+
+        LimeLog.severe("connectionTerminated Connection terminated: " + errorCode);
 
         runOnUiThread(new Runnable() {
             @Override
@@ -2485,6 +2496,8 @@ public class Game extends Activity implements SurfaceHolder.Callback,
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
+        LimeLog.info("Surface Created: " + format +","+width +","+height);
         if (!surfaceCreated) {
             throw new IllegalStateException("Surface changed before creation!");
         }
@@ -2539,6 +2552,8 @@ public class Game extends Activity implements SurfaceHolder.Callback,
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
+
+        LimeLog.info("surface destroyed");
         if (!surfaceCreated) {
             throw new IllegalStateException("Surface destroyed before creation!");
         }
