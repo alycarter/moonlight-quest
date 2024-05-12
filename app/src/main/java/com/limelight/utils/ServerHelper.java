@@ -1,11 +1,15 @@
 package com.limelight.utils;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.graphics.Rect;
+import android.os.Bundle;
 import android.widget.Toast;
 
 import com.limelight.AppView;
 import com.limelight.Game;
+import com.limelight.LimeLog;
 import com.limelight.R;
 import com.limelight.ShortcutTrampoline;
 import com.limelight.binding.PlatformBinding;
@@ -80,7 +84,15 @@ public class ServerHelper {
             Toast.makeText(parent, parent.getResources().getString(R.string.pair_pc_offline), Toast.LENGTH_SHORT).show();
             return;
         }
-        parent.startActivity(createStartIntent(parent, app, computer, managerBinder));
+        /* this doesn't work for some reason, this would be ideal as we could vary the resolution
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            LimeLog.info("using launch bounds");
+            Bundle bounds = ActivityOptions.makeBasic().setLaunchBounds(new Rect(0,0,1920,1080)).toBundle();
+            parent.startActivity(createStartIntent(parent, app, computer, managerBinder), bounds);
+        }else*/
+        {
+            parent.startActivity(createStartIntent(parent, app, computer, managerBinder));
+        }
     }
 
     public static void doNetworkTest(final Activity parent) {

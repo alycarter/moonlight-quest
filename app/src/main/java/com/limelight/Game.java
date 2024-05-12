@@ -805,7 +805,7 @@ public class Game extends Activity implements SurfaceHolder.Callback,
                         candidate.getPhysicalHeight() >= prefConfig.height;
 
                 LimeLog.info("Examining display mode: "+candidate.getPhysicalWidth()+"x"+
-                        candidate.getPhysicalHeight()+"x"+candidate.getRefreshRate());
+                        candidate.getPhysicalHeight()+"x"+candidate.getRefreshRate() + ", ID " + candidate.getModeId());
 
                 if (candidate.getPhysicalWidth() > 4096 && prefConfig.width <= 4096) {
                     // Avoid resolutions options above 4K to be safe
@@ -875,7 +875,7 @@ public class Game extends Activity implements SurfaceHolder.Callback,
             }
 
             LimeLog.info("Best display mode: "+bestMode.getPhysicalWidth()+"x"+
-                    bestMode.getPhysicalHeight()+"x"+bestMode.getRefreshRate());
+                    bestMode.getPhysicalHeight()+"x"+bestMode.getRefreshRate()+ ", ID " + bestMode.getModeId());
 
             // Only apply new window layout parameters if we've actually changed the display mode
             if (display.getMode().getModeId() != bestMode.getModeId()) {
@@ -886,6 +886,7 @@ public class Game extends Activity implements SurfaceHolder.Callback,
                         display.getMode().getPhysicalWidth() != bestMode.getPhysicalWidth() ||
                         display.getMode().getPhysicalHeight() != bestMode.getPhysicalHeight()) {
                     // Apply the display mode change
+                    LimeLog.info("Setting display mode ID : " + bestMode.getModeId());
                     windowLayoutParams.preferredDisplayModeId = bestMode.getModeId();
                     getWindow().setAttributes(windowLayoutParams);
                 }

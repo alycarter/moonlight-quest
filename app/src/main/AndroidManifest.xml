@@ -90,18 +90,24 @@
             android:exported="true"
             android:resizeableActivity="true"
             android:enableOnBackInvokedCallback="true"
+            android:screenOrientation="landscape"
             android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection">
 
             <meta-data android:name="WindowManagerPreference:FreeformWindowSize" android:value="system-default" />
             <meta-data android:name="WindowManagerPreference:FreeformWindowOrientation" android:value="landscape" />
 
+            <layout android:defaultHeight="1080px"
+                android:defaultWidth="2560px"
+                android:gravity="top"
+            android:minHeight="1080px"
+            android:minWidth="2560px" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
-                <category android:name="tv.ouya.intent.category.APP" />
+                <category android:name="com.oculus.intent.category.2D" />
+                <category android:name="com.oculus.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <!-- Small hack to support launcher shortcuts without relaunching over and over again when the back button is pressed -->
