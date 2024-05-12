@@ -118,6 +118,8 @@ public class PreferenceConfiguration {
     public static final String RES_1080P = "1920x1080";
     public static final String RES_1440P = "2560x1440";
     public static final String RES_4K = "3840x2160";
+    public static final String RES_WQHD = "3440x1440";
+    public static final String RES_WFHD = "2560x1080";
     public static final String RES_NATIVE = "Native";
 
     public int width, height, fps;
@@ -168,6 +170,12 @@ public class PreferenceConfiguration {
             return false;
         }
         else if (width == 2560 && height == 1440) {
+            return false;
+        }
+        else if (width == 2560 && height == 1080) {
+            return false;
+        }
+        else if (width == 3440 && height == 1440) {
             return false;
         }
         else if (width == 3840 && height == 2160) {
@@ -221,6 +229,12 @@ public class PreferenceConfiguration {
         else if (resString.equalsIgnoreCase("4K")) {
             return RES_4K;
         }
+        else if (resString.equalsIgnoreCase("WFHD")) {
+            return RES_WFHD;
+        }
+        else if (resString.equalsIgnoreCase("WQHD")) {
+            return RES_WQHD;
+        }
         else {
             // Should be unreachable
             return RES_720P;
@@ -245,9 +259,21 @@ public class PreferenceConfiguration {
             case 720:
                 return RES_720P;
             case 1080:
-                return RES_1080P;
+                switch(width)
+                {
+                    case 2560:
+                        return RES_WFHD;
+                    default:
+                        return RES_1080P;
+                }
             case 1440:
-                return RES_1440P;
+                switch(width)
+                {
+                    case 3440:
+                        return RES_WQHD;
+                    default:
+                        return RES_1080P;
+                }
             case 2160:
                 return RES_4K;
         }

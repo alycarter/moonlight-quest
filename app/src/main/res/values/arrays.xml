@@ -5,7 +5,9 @@
         <item>@string/resolution_480p</item>
         <item>@string/resolution_720p</item>
         <item>@string/resolution_1080p</item>
+        <item>@string/resolution_WFHD</item>
         <item>@string/resolution_1440p</item>
+        <item>@string/resolution_WQHD</item>
         <item>@string/resolution_4k</item>
     </string-array>
 
@@ -15,7 +17,9 @@
         <item>854x480</item>
         <item>1280x720</item>
         <item>1920x1080</item>
+        <item>2560x1080</item>
         <item>2560x1440</item>
+        <item>3440x1440</item>
         <item>3840x2160</item>
     </string-array>
 
