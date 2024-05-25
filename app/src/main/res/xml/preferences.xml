@@ -144,6 +144,13 @@
             android:title="@string/title_checkbox_absolute_mouse_mode"
             android:summary="@string/summary_checkbox_absolute_mouse_mode"
             android:defaultValue="false" />
+        <ListPreference
+            android:defaultValue="3"
+            android:entries="@array/sensitivity_values"
+            android:entryValues="@array/sensitivity_values"
+            android:key="list_mouse_sensitivity"
+            android:summary="Sensitivty of mouse when captured. 10 is full sensitivity. "
+            android:title="Relative Mouse Sensitivity" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/category_on_screen_controls_settings"
         android:key="category_onscreen_controls">

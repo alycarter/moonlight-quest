@@ -28,6 +28,7 @@ public class PreferenceConfiguration {
 
     static final String RESOLUTION_PREF_STRING = "list_resolution";
     static final String FPS_PREF_STRING = "list_fps";
+    static final String MOUSE_SENSITIVITY_PREF_STRING = "list_mouse_sensitivity";
     static final String BITRATE_PREF_STRING = "seekbar_bitrate_kbps";
     private static final String BITRATE_PREF_OLD_STRING = "seekbar_bitrate";
     private static final String STRETCH_PREF_STRING = "checkbox_stretch_video";
@@ -70,6 +71,7 @@ public class PreferenceConfiguration {
 
     static final String DEFAULT_RESOLUTION = "1280x720";
     static final String DEFAULT_FPS = "60";
+    static final String DEFAULT_MOUSE_SENSITIVITY = "5";
     private static final boolean DEFAULT_STRETCH = false;
     private static final boolean DEFAULT_SOPS = true;
     private static final boolean DEFAULT_DISABLE_TOASTS = false;
@@ -148,6 +150,7 @@ public class PreferenceConfiguration {
     public MoonBridge.AudioConfiguration audioConfiguration;
     public int framePacing;
     public boolean absoluteMouseMode;
+    public int mouseSensitivity;
     public boolean enableAudioFx;
     public boolean reduceRefreshRate;
     public boolean fullRange;
@@ -592,6 +595,8 @@ public class PreferenceConfiguration {
         config.oscOpacity = prefs.getInt(OSC_OPACITY_PREF_STRING, DEFAULT_OPACITY);
 
         config.language = prefs.getString(LANGUAGE_PREF_STRING, DEFAULT_LANGUAGE);
+
+        config.mouseSensitivity = Integer.parseInt(prefs.getString(MOUSE_SENSITIVITY_PREF_STRING, PreferenceConfiguration.DEFAULT_MOUSE_SENSITIVITY));
 
         // Checkbox preferences
         config.disableWarnings = prefs.getBoolean(DISABLE_TOASTS_PREF_STRING, DEFAULT_DISABLE_TOASTS);

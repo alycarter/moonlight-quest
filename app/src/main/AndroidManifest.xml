@@ -55,6 +55,20 @@
         android:localeConfig="@xml/locales_config"
         android:enableOnBackInvokedCallback="false"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".ResolutionActivity"
+            android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
+            android:enableOnBackInvokedCallback="true"
+            android:exported="true"
+            android:resizeableActivity="true"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="com.oculus.intent.category.2D" />
+            </intent-filter>
+
+        </activity>
 
         <provider
             android:name=".PosterContentProvider"
@@ -86,84 +100,153 @@
              in each activity even though it is implied by targeting API 24+ -->
 
         <activity
+            android:name=".PcViewFHD"
+            android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
+            android:enableOnBackInvokedCallback="true"
+            android:exported="true">
+
+            <layout
+                android:defaultWidth="1920px"
+                android:defaultHeight="1080px"
+                android:gravity="top"
+                android:minWidth="1920px"
+                android:minHeight="1080px"/>
+        </activity>
+
+        <activity
+            android:name=".PcViewQHD"
+            android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
+            android:enableOnBackInvokedCallback="true"
+            android:exported="true">
+
+            <layout
+                android:defaultWidth="2560px"
+                android:defaultHeight="1440px"
+                android:gravity="top"
+                android:minWidth="2560px"
+                android:minHeight="1440px"/>
+        </activity>
+        <activity
+            android:name=".PcViewWFHD"
+            android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
+            android:enableOnBackInvokedCallback="true"
+            android:exported="true">
+
+            <layout
+                android:defaultWidth="2560px"
+                android:defaultHeight="1080px"
+                android:gravity="top"
+                android:minWidth="2560px"
+                android:minHeight="1080px"/>
+        </activity>
+        <activity
+            android:name=".PcViewWQHD"
+            android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
+            android:enableOnBackInvokedCallback="true"
+            android:exported="true">
+
+            <layout
+                android:defaultWidth="3440px"
+                android:defaultHeight="1440px"
+                android:gravity="top"
+                android:minWidth="3440px"
+                android:minHeight="1440px"/>
+        </activity>
+        <activity
+            android:name=".PcViewUHD"
+            android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
+            android:enableOnBackInvokedCallback="true"
+            android:exported="true">
+            <layout
+                android:defaultWidth="3840px"
+                android:defaultHeight="2160px"
+                android:gravity="top"
+                android:minWidth="3840px"
+                android:minHeight="2160px"/>
+        </activity>
+        <activity
             android:name=".PcView"
-            android:exported="true"
-            android:resizeableActivity="true"
+            android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
             android:enableOnBackInvokedCallback="true"
             android:screenOrientation="landscape"
-            android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection">
-
-            <meta-data android:name="WindowManagerPreference:FreeformWindowSize" android:value="system-default" />
+            android:exported="true">
             <meta-data android:name="WindowManagerPreference:FreeformWindowOrientation" android:value="landscape" />
-
-            <layout android:defaultHeight="1080px"
-                android:defaultWidth="2560px"
-                android:gravity="top"
-            android:minHeight="1080px"
-            android:minWidth="2560px" />
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
-                <category android:name="com.oculus.intent.category.2D" />
-                <category android:name="com.oculus.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
         <!-- Small hack to support launcher shortcuts without relaunching over and over again when the back button is pressed -->
         <activity
             android:name=".ShortcutTrampoline"
-            android:noHistory="true"
-            android:exported="true"
-            android:resizeableActivity="true"
+            android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
             android:enableOnBackInvokedCallback="true"
-            android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection">
-            <meta-data android:name="WindowManagerPreference:FreeformWindowSize" android:value="system-default" />
-            <meta-data android:name="WindowManagerPreference:FreeformWindowOrientation" android:value="landscape" />
+            android:exported="true"
+            android:noHistory="true"
+            android:resizeableActivity="true">
+            <meta-data
+                android:name="WindowManagerPreference:FreeformWindowSize"
+                android:value="system-default" />
+            <meta-data
+                android:name="WindowManagerPreference:FreeformWindowOrientation"
+                android:value="landscape" />
         </activity>
         <activity
             android:name=".AppView"
-            android:resizeableActivity="true"
+            android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
             android:enableOnBackInvokedCallback="true"
-            android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection">
-            <meta-data android:name="WindowManagerPreference:FreeformWindowSize" android:value="system-default" />
-            <meta-data android:name="WindowManagerPreference:FreeformWindowOrientation" android:value="landscape" />
+            android:resizeableActivity="true">
+            <meta-data
+                android:name="WindowManagerPreference:FreeformWindowSize"
+                android:value="system-default" />
+            <meta-data
+                android:name="WindowManagerPreference:FreeformWindowOrientation"
+                android:value="landscape" />
         </activity>
         <activity
             android:name=".preferences.StreamSettings"
-            android:resizeableActivity="true"
-            android:enableOnBackInvokedCallback="true"
             android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
-            android:label="Streaming Settings">
-            <meta-data android:name="WindowManagerPreference:FreeformWindowSize" android:value="system-default" />
-            <meta-data android:name="WindowManagerPreference:FreeformWindowOrientation" android:value="landscape" />
+            android:enableOnBackInvokedCallback="true"
+            android:label="Streaming Settings"
+            android:resizeableActivity="true">
+            <meta-data
+                android:name="WindowManagerPreference:FreeformWindowSize"
+                android:value="system-default" />
+            <meta-data
+                android:name="WindowManagerPreference:FreeformWindowOrientation"
+                android:value="landscape" />
         </activity>
         <activity
             android:name=".preferences.AddComputerManually"
-            android:resizeableActivity="true"
-            android:windowSoftInputMode="stateVisible"
-            android:enableOnBackInvokedCallback="true"
             android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
-            android:label="Add Computer Manually">
-            <meta-data android:name="WindowManagerPreference:FreeformWindowSize" android:value="system-default" />
-            <meta-data android:name="WindowManagerPreference:FreeformWindowOrientation" android:value="landscape" />
+            android:enableOnBackInvokedCallback="true"
+            android:label="Add Computer Manually"
+            android:resizeableActivity="true"
+            android:windowSoftInputMode="stateVisible">
+            <meta-data
+                android:name="WindowManagerPreference:FreeformWindowSize"
+                android:value="system-default" />
+            <meta-data
+                android:name="WindowManagerPreference:FreeformWindowOrientation"
+                android:value="landscape" />
         </activity>
         <activity
             android:name=".Game"
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
-            android:supportsPictureInPicture="true"
-            android:resizeableActivity="true"
             android:enableOnBackInvokedCallback="false"
-            android:launchMode="singleTask"
             android:excludeFromRecents="true"
-            android:theme="@style/StreamTheme"
-            android:preferMinimalPostProcessing="true">
+            android:launchMode="singleTask"
+            android:preferMinimalPostProcessing="true"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            android:theme="@style/StreamTheme">
+            <meta-data
+                android:name="WindowManagerPreference:FreeformWindowSize"
+                android:value="system-default" />
+            <meta-data
+                android:name="WindowManagerPreference:FreeformWindowOrientation"
+                android:value="landscape" />
 
-            <meta-data android:name="WindowManagerPreference:FreeformWindowSize" android:value="system-default" />
-            <meta-data android:name="WindowManagerPreference:FreeformWindowOrientation" android:value="landscape" />
-
-            <!-- Special metadata for NVIDIA Shield devices to prevent input buffering
-                 and most importantly, opt out of mouse acceleration while streaming -->
+            <!--
+                 Special metadata for NVIDIA Shield devices to prevent input buffering
+                 and most importantly, opt out of mouse acceleration while streaming
+            -->
             <meta-data
                 android:name="com.nvidia.immediateInput"
                 android:value="true" />
@@ -184,11 +267,15 @@
 
         <activity
             android:name=".HelpActivity"
-            android:resizeableActivity="true"
+            android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
             android:enableOnBackInvokedCallback="true"
-            android:configChanges="mcc|mnc|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection">
-            <meta-data android:name="WindowManagerPreference:FreeformWindowSize" android:value="system-default" />
-            <meta-data android:name="WindowManagerPreference:FreeformWindowOrientation" android:value="landscape" />
+            android:resizeableActivity="true">
+            <meta-data
+                android:name="WindowManagerPreference:FreeformWindowSize"
+                android:value="system-default" />
+            <meta-data
+                android:name="WindowManagerPreference:FreeformWindowOrientation"
+                android:value="landscape" />
         </activity>
     </application>
 

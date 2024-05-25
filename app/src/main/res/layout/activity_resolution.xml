@@ -1,0 +1,62 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".preferences.AddComputerManually" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/selectResolution"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:preferKeepClear="true"
+            android:text="@string/selectQuestResolution"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Button
+            android:id="@+id/resolutionDefault"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Default" />
+
+        <Button
+            android:id="@+id/resolutionFHD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1080p" />
+
+        <Button
+            android:id="@+id/resolutionQHD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1440p" />
+
+        <Button
+            android:id="@+id/resolutionUHD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2160p" />
+
+        <Button
+            android:id="@+id/resolutionWFHD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ultra Wide 1080p" />
+
+        <Button
+            android:id="@+id/resolutionWQHD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ultra Wide 1440p" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1839,7 +1839,9 @@ public class Game extends Activity implements SurfaceHolder.Callback,
                     // Send the deltas straight from the motion event
                     short deltaX = (short)inputCaptureProvider.getRelativeAxisX(event);
                     short deltaY = (short)inputCaptureProvider.getRelativeAxisY(event);
-
+                    float sensitivityScalar = (float)prefConfig.mouseSensitivity/10.0f;
+                    deltaX = (short)((float)deltaX * sensitivityScalar);
+                    deltaY = (short)((float)deltaY * sensitivityScalar);
                     if (deltaX != 0 || deltaY != 0) {
                         if (prefConfig.absoluteMouseMode) {
                             // NB: view may be null, but we can unconditionally use streamView because we don't need to adjust
